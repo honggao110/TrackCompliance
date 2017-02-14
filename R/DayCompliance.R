@@ -11,6 +11,9 @@
 #' @param coor longitude and latitude of tracking points in the format of c("lon","lat").
 #' @param time local time variable
 #' @param time.format format of \code{time} to pass to \code{as.POSIXct}
+#' @param hour.require the number of hours required for a day to be successful
+#' @param output a string object indicating what format the output should be. Must be
+#' either "json" or "dataframe".
 #'
 #' @return a data frame or a json
 #'
@@ -20,6 +23,55 @@
 #'
 #' @export
 
-DayCompliance <- function() {
+DayCompliance <- function(json, id = NULL, coor = NULL,
+                          time = NULL, time.format = NULL,
+                          hour.require = NULL,
+                          output = c("json", "dataframe"))
+  {
+  if (is.null(id)){
+    stop("id can't be NULL.")
+  }
 
+  if (is.null(coor)){
+    stop("coor can't be NULL.")
+  }
+
+  if (is.null(time)){
+    stop("time can't be NULL.")
+  }
+
+  if (is.null(time.format)){
+    stop("time.format can't be NULL.")
+  }
+
+  if (is.null(hour.require)){
+    stop("hour.require can't be NULL.")
+  } else if (!is.numeric(hour.require)) {
+    stop("hour.require must be numeric.")
+  }
+
+  if (is.null(output)){
+    stop("output should be specified ('json' or 'dataframe'). ")
+  } else if (!output %in% c("json", "dataframe")){
+    stop("output should be 'json' or 'dataframe' ")
+  }
+
+  track <- TrackJsonToDF(json, id = id, coor = coor, time = time,
+                         time.format = time.format)
+  track<- track[order(track[, id],track[, time]),]
+  track$date<- as.Date(track[,time], format="%Y-%m-%d")
+  track$hourscomp<- time.bin(track, time = time, timebin = timebin, groupvar = id)
+  day<- unique(track[c(id, "date", "hourscomp")])
+  day$comp<- as.numeric(ifelse(day$hourscomp >= hour.require, 1, 0))
+
+  # data output
+  if (output == "json"){
+    data.return <- list(DayCompliance= day)
+    data.return <- jsonlite::toJSON(data.return, dataframe = "columns")
+    data.return<- gsub("\\[|\\]","",data.return)
+  } else {
+    data.return <- day
+  }
+
+  return(data.return)
 }
