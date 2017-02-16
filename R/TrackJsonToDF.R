@@ -35,6 +35,7 @@ TrackJsonToDF <- function(json, id = NULL, coor = NULL, time = NULL, time.format
   }
 
   track.data <- jsonlite::fromJSON(json)
+  track.data <- data.frame(track.data)
   track.data <- track.data[, c(id, coor, time)]
   track.data[, time] <- as.POSIXct(track.data[, time], format = time.format)
   names(track.data) <- c("id", "lon", "lat", "datetime")
