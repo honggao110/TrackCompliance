@@ -11,6 +11,7 @@
 #' @param coor longitude and latitude of tracking points in the format of c("lon","lat").
 #' @param time local time variable
 #' @param time.format format of \code{time} to pass to \code{as.POSIXct}
+#' @param timebin time bin to test whether at least one point is recorded
 #' @param hour.require the number of hours required for a day to be successful
 #' @param output a string object indicating what format the output should be. Must be
 #' either "json" or "dataframe".
@@ -25,6 +26,7 @@
 
 DayCompliance <- function(json, id = NULL, coor = NULL,
                           time = NULL, time.format = NULL,
+                          timebin = NULL,
                           hour.require = NULL,
                           output = c("json", "dataframe"))
   {
