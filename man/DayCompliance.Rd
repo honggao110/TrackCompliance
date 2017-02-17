@@ -5,8 +5,8 @@
 \title{Calculate Within Day Compliance}
 \usage{
 DayCompliance(json, id = NULL, coor = NULL, time = NULL,
-  time.format = NULL, hour.require = NULL, output = c("json",
-  "dataframe"))
+  time.format = NULL, timebin = NULL, hour.require = NULL,
+  output = c("json", "dataframe"))
 }
 \arguments{
 \item{json}{a json object.}
@@ -18,6 +18,8 @@ DayCompliance(json, id = NULL, coor = NULL, time = NULL,
 \item{time}{local time variable}
 
 \item{time.format}{format of \code{time} to pass to \code{as.POSIXct}}
+
+\item{timebin}{time bin to test whether at least one point is recorded}
 
 \item{hour.require}{the number of hours required for a day to be successful}
 

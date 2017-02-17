@@ -18,7 +18,6 @@
 #' mobility_stay$dispm<- displacement(mobility_stay, coor = c("stayeventlon","stayeventlat"), groupvar = "id")
 #'
 #' @importFrom geosphere distVincentyEllipsoid
-#' @importFrom DataCombine slide
 #'
 #' @export
 
