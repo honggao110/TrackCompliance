@@ -22,6 +22,5 @@ This function keeps the correct date format in a ifelse condition function
 }
 \examples{
 
-
 }
 

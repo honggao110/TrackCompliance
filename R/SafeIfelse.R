@@ -11,10 +11,7 @@
 #'
 #' @examples
 #'
-#'
-#' @importFrom geosphere distVincentyEllipsoid
-#' @importFrom DataCombine slide
-#'
+#' @import
 #' @export
 
 SafeIfelse <- function(cond, yes, no)
