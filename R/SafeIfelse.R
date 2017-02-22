@@ -11,7 +11,7 @@
 #'
 #' @examples
 #'
-#' @import
+#'
 #' @export
 
 SafeIfelse <- function(cond, yes, no)
