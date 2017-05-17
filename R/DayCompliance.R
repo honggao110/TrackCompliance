@@ -60,9 +60,10 @@ DayCompliance <- function(json, id = NULL, coor = NULL,
 
   track <- TrackJsonToDF(json, id = id, coor = coor, time = time,
                          time.format = time.format)
-  track<- track[order(track[, id],track[, time]),]
-  track$date<- as.Date(track[,time], format="%Y-%m-%d")
-  track$hourscomp<- time.bin(track, time = time, timebin = timebin, groupvar = id)
+  track$datetime <- as.POSIXct(track[, time], format = time.format)
+  track<- track[order(track[, id],track$datetime),]
+  track$date<- as.Date(track$datetime, format="%Y-%m-%d")
+  track$hourscomp<- TimeBin(track, time = "datetime", timebin = timebin, groupvar = id)
   day<- unique(track[c(id, "date", "hourscomp")])
   day$comp<- as.numeric(ifelse(day$hourscomp >= hour.require, 1, 0))
 
