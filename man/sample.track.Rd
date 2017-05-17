@@ -19,4 +19,3 @@ sample.track
 A dataset containing 1000 sample tracks.
 }
 \keyword{datasets}
-

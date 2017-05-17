@@ -30,4 +30,3 @@ mobility_stay$dispm<- displacement(mobility_stay, coor = c("stayeventlon","staye
 
 
 }
-

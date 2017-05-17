@@ -39,4 +39,3 @@ must be at least one point in each time bin (i.e. 15 minutes).
 \examples{
 
 }
-
