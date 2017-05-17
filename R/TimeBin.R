@@ -17,6 +17,7 @@
 #' mobility_stay<- aggregate(cbind(id, stayeventlon, stayeventlat)~stayeventgroup, mobility_stay, mean)
 #' mobility_stay$dispm<- displacement(mobility_stay, coor = c("stayeventlon","stayeventlat"), groupvar = "id")
 #'
+#' @importFrom lubridate is.POSIXct
 #'
 #' @export
 
