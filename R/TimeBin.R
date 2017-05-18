@@ -18,6 +18,8 @@
 #' mobility_stay$dispm<- displacement(mobility_stay, coor = c("stayeventlon","stayeventlat"), groupvar = "id")
 #'
 #' @import lubridate
+#' @importFrom plyr count
+#' @importFrom plyr rename
 #'
 #' @export
 
